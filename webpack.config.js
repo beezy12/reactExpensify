@@ -23,11 +23,13 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true
   }
 };
 
 
+// historyApiFallback: true says for all 404 routes, to serve up the index.html. helps with routing for now
 
 //     /\.js$/ -> says Im looking for any file that ends in .js
 //     /\.s?css$/  -> says to look for css AND scss files
