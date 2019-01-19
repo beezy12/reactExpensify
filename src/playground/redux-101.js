@@ -20,7 +20,7 @@ const resetCount = () => ({
   type: 'RESET'
 });
 
-const setCount = ( { count = 20 } = {}) => ({
+const setCount = ({ count } = {}) => ({
   type: 'SET',
   count: count
 });
