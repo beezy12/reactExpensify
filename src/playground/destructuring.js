@@ -1,3 +1,7 @@
+
+
+// OBJECT DESTRUCTURING ******************************
+
 // const person = {
 //   name: 'beezy',
 //   age: 39,
@@ -23,14 +27,32 @@
 // console.log(`${first_name} is ${age} years old.`);
 
 
-const book = {
-  title: 'Ego is the Enemy',
-  author: 'Ryan Holiday',
-  publisher: {
-    name: 'Penguin'
-  }
-};
+// const book = {
+//   title: 'Ego is the Enemy',
+//   author: 'Ryan Holiday',
+//   publisher: {
+//     name: 'Penguin'
+//   }
+// };
 
-// changes name to publisherName and uses 'Self-Published' if there is no publisher name on the book object
-const { name: publisherName = 'Self-Published' } = book.publisher
-console.log(publisherName);
+// // changes name to publisherName and uses 'Self-Published' if there is no publisher name on the book object
+// const { name: publisherName = 'Self-Published' } = book.publisher
+// console.log(publisherName);
+
+// *************************************************************************************************************
+
+
+// ARRAY DESTRUCTURING ******************************
+
+const address = ['1299 Juniper St', 'Philly', 'PA', '37219'];
+
+// for array destructuring, you can leave the first item off by just leaving a comma. to leave
+// the last item off...you can just leave it off.
+// = 'New York' is how you set a default
+const [ , city, state = 'New York' ] = address;
+console.log(`you are in ${city} ${state}`);
+
+
+const coffeeStore = ['coffee', '$2.00', '$2.50', '$3.00'];
+const [ item, , medium, large ] = coffeeStore;
+console.log(`a medium ${item} costs about ${medium}`);
