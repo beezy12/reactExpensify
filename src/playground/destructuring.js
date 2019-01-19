@@ -56,3 +56,14 @@ console.log(`you are in ${city} ${state}`);
 const coffeeStore = ['coffee', '$2.00', '$2.50', '$3.00'];
 const [ item, , medium, large ] = coffeeStore;
 console.log(`a medium ${item} costs about ${medium}`);
+
+
+
+
+//************************************************************************************************
+
+const add = ({ a, b }, c) => {
+  return a + b + c;
+};
+
+console.log(add({a: 3, b: 6}, 100));
