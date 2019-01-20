@@ -33,7 +33,7 @@ const setCount = ({ count } = {}) => ({
 // -REDUCERS determine what to do off of an action. it's how we change the state.
 // -REDUCERS are pure functions...meaning functions that solely depend upon the input (and not global vars).
 // ....they compute the new state based off of the old state and the action that were both passed in.
-// -you don't want to mutate state or action, just returning an object that represents the new state.
+// -you don't want to mutate state or action with a reducer, just returning an object that represents the new state.
 // ...changing state directly will have unintended consequences.
 
 // creating a store. it needs at least one argument, which is a function that gets called right away.
