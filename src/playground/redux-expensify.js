@@ -20,7 +20,13 @@ const addExpense = (
     createdAt
   }
 });
+
 // REMOVE_EXPENSE
+const removeExpense = ({ id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id
+});
+
 // EDIT_EXPENSE
 // SET_TEXT_FILTER
 // SORT_BY_DATE
@@ -39,12 +45,17 @@ const addExpense = (
 // ...it just adds it to the end of the array. this does the same thing as array.concat
 const expensesRedducerDefaultState = [];
 const expensesReducer = (state = expensesRedducerDefaultState, action) => {
+  
   switch (action.type) {
     case 'ADD_EXPENSE':
+      // console.log('yooo', action.expense)
       return [
         ...state,
         action.expense
       ]
+    case 'REMOVE_EXPENSE':
+    console.log('what does state look like', state)
+      return state.filter(expense => expense.id !== action.id);
     default:
       return state;
   }
@@ -80,11 +91,16 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 // dispatching the action
-store.dispatch(addExpense({ description: 'rent', amount: 100 }));
-store.dispatch(addExpense({ description: 'coffee', amount: 300 }));
+const expenseOne = store.dispatch(addExpense({ description: 'rent', amount: 100 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'coffee', amount: 300 }));
+
+const removeOne = store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
 
 
+
+
+// THIS ISNT USED, WAS JUST AN EXAMPLE ******************************
 
 const demoState = {
   expenses: [{
