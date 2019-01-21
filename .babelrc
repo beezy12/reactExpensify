@@ -1,11 +1,12 @@
 // transform-class-properties  -> lets you do away with class constructors and having to bind functions
-
+// transform-object-rest-spread -> had to add this to use object spread operator
 {
   "presets": [
     "env",
     "react"
   ],
   "plugins": [
-    "transform-class-properties"
+    "transform-class-properties",
+    "transform-object-rest-spread"
   ]
 }

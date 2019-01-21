@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 
-// ************* ACTIONS ************//
+// ************* ACTIONS **********************************//
 // ADD_EXPENSE
 const addExpense = (
   { 
@@ -28,7 +28,19 @@ const removeExpense = ({ id } = {}) => ({
 });
 
 // EDIT_EXPENSE
+const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates
+});
+
 // SET_TEXT_FILTER
+const setTextFilter = (text = '') => ({
+  type: 'SET_TEXT_FILTER',
+  text
+});
+
+
 // SORT_BY_DATE
 // SORT_BY_AMOUNT
 // SET_START_DATE
@@ -54,8 +66,22 @@ const expensesReducer = (state = expensesRedducerDefaultState, action) => {
         action.expense
       ]
     case 'REMOVE_EXPENSE':
-    console.log('what does state look like', state)
+      console.log('what does state look like', state)
       return state.filter(expense => expense.id !== action.id);
+    case 'EDIT_EXPENSE':
+      return state.map((expense) => {
+        // if my list of expense IDs in state (expense.id) has an ID matching the ID 
+        // that was passed in (action.id), spread out the expense object, and spread out and run 
+        // all of the action.updates
+        if (expense.id === action.id) {
+          return {
+            ...expense,
+            ...action.updates
+          }
+        } else {
+          return expense;
+        };
+      });
     default:
       return state;
   }
@@ -65,6 +91,11 @@ const expensesReducer = (state = expensesRedducerDefaultState, action) => {
 const filtersReducerDefaultState = { text: '', sortBy: 'date', startDate: undefined, endDate: undefined };
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
+    case 'SET_TEXT_FILTER':
+      return {
+        ...state,
+        text: action.text
+      };
     default:
       return state;
   }
@@ -94,10 +125,13 @@ store.subscribe(() => {
 const expenseOne = store.dispatch(addExpense({ description: 'rent', amount: 100 }));
 const expenseTwo = store.dispatch(addExpense({ description: 'coffee', amount: 300 }));
 
-const removeOne = store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
-
+// set 'rent' as the text on an expense, overriding the 'text' property. 'text' defaults to empty string
+store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter());
 
 
 // THIS ISNT USED, WAS JUST AN EXAMPLE ******************************
@@ -117,3 +151,21 @@ const demoState = {
     endDate: undefined
   }
 };
+
+
+// ****************** OBJECT SPREAD OPERATOR PRACTICE **********************//
+// have to first add something to babel config...because not everything is ready for object spread yet
+// yarn add babel-plugin-transform-object-rest-spread@6.23.0
+
+// const user = {
+//   name: 'beez',
+//   age: 39
+// }
+
+
+// this is how you add to an object using spread, or overwrite an existing element
+// console.log({
+//   ...user,
+//   location: 'Austin',
+//   age: 12
+// });
