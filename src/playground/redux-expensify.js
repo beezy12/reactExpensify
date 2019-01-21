@@ -42,9 +42,29 @@ const setTextFilter = (text = '') => ({
 
 
 // SORT_BY_DATE
+const sortByDate = () => ({
+  type: 'SORT_BY_DATE'
+});
+
 // SORT_BY_AMOUNT
-// SET_START_DATE
+const sortByAmount = () => ({
+  type: 'SORT_BY_AMOUNT'
+});
+
+// SET_START_DATE    (startDate is already undefined, no need for a default)
+const setStartDate = (startDate) =>({
+  type: 'SET_START_DATE',
+  startDate
+});
+
 // SET_END_DATE
+const setEndDate = (endDate) => ({
+  type: 'SET_END_DATE',
+  endDate
+});
+
+
+
 
 // ********************************************************************************************* //
 // break up the app into multiple reducers.
@@ -96,6 +116,26 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         ...state,
         text: action.text
       };
+    case 'SORT_BY_AMOUNT':
+      return {
+        ...state,
+        sortBy: 'amount'
+      }
+    case 'SORT_BY_DATE':
+      return {
+        ...state,
+        sortBy: 'date'
+      }
+    case 'SET_START_DATE':
+      return {
+        ...state,
+        startDate: action.startDate
+      }
+    case 'SET_END_DATE':
+      return {
+        ...state,
+        endDate: action.endDate
+      }
     default:
       return state;
   }
@@ -122,16 +162,24 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 // dispatching the action
-const expenseOne = store.dispatch(addExpense({ description: 'rent', amount: 100 }));
-const expenseTwo = store.dispatch(addExpense({ description: 'coffee', amount: 300 }));
+// const expenseOne = store.dispatch(addExpense({ description: 'rent', amount: 100 }));
+// const expenseTwo = store.dispatch(addExpense({ description: 'coffee', amount: 300 }));
 
-store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+// store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
-store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+// store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
-// set 'rent' as the text on an expense, overriding the 'text' property. 'text' defaults to empty string
-store.dispatch(setTextFilter('rent'));
-store.dispatch(setTextFilter());
+// // set 'rent' as the text on an expense, overriding the 'text' property. 'text' defaults to empty string
+// store.dispatch(setTextFilter('rent'));
+// store.dispatch(setTextFilter());
+
+// store.dispatch(sortByAmount());   // amount
+// store.dispatch(sortByDate());     // date
+
+store.dispatch(setStartDate(125));
+store.dispatch(setStartDate());
+store.dispatch(setEndDate(7777));
+store.dispatch(setEndDate());
 
 
 // THIS ISNT USED, WAS JUST AN EXAMPLE ******************************
