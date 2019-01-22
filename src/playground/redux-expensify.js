@@ -146,14 +146,18 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
 // *********** FILTERING *********************************//
 // get visible expenses, getting expenses and destructuring the filters object here
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
-  console.log(expenses.description)
-  console.log(text)
   return expenses.filter(expense => {
     const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
     const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;;
     const textMatch = expense.description.toLowerCase().includes(text);
 
     return startDateMatch && endDateMatch && textMatch;
+  }).sort((a, b) => {
+    if (sortBy === 'date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    } else if (sortBy === 'amount') {
+      return a.amount < b.amount ? 1 : -1;
+    }
   });
 };
 
@@ -179,18 +183,18 @@ store.subscribe(() => {
   console.log(visibleExpenses);
 });
 // dispatching the action
-const expenseOne = store.dispatch(addExpense({ description: 'rent', amount: 100, createdAt: 1000 }));
-const expenseTwo = store.dispatch(addExpense({ description: 'coffee', amount: 300, createdAt: -3000 }));
+const expenseOne = store.dispatch(addExpense({ description: 'rent', amount: 100, createdAt: -21000 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'coffee', amount: 300, createdAt:  -3000 }));
 
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
 // // set 'rent' as the text on an expense, overriding the 'text' property. 'text' defaults to empty string
-store.dispatch(setTextFilter('rent'));
+// store.dispatch(setTextFilter('rent'));
 // store.dispatch(setTextFilter());
 
-// store.dispatch(sortByAmount());   // amount
+store.dispatch(sortByAmount());   // amount
 // store.dispatch(sortByDate());     // date
 
 // store.dispatch(setStartDate(125));
