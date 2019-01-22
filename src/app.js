@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import * as expenseActions from './actions/expenses';
@@ -23,7 +24,15 @@ console.log(visibleExpenses);
 
 console.log(store.getState());
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'));
+// IMPORTANT - this is how you connect react to redux. wrap the app with Provider tags.
+// AppRouter used to be in the ReactDOM.render()
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+
+ReactDOM.render(jsx, document.getElementById('app'));
 
 
 
