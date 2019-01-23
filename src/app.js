@@ -14,11 +14,11 @@ const store = configureStore();
 // dispatch actions to the store
 store.dispatch(expenseActions.addExpense({ description: 'Water bill', note: 'this was late', amount: 500000, createdAt: 302323 }));
 store.dispatch(expenseActions.addExpense({ description: 'Gas bill', amount: 4000000, note: 'on time' }));
-//store.dispatch(filterActions.setTextFilter('bill'));   // this returns two bills
+// store.dispatch(filterActions.setTextFilter('bill'));   // this returns two bills
 store.dispatch(filterActions.setTextFilter('water'));    // ....but this returns only one
 
 setTimeout(() => {
-  store.dispatch(filterActions.setTextFilter('water'));
+  store.dispatch(filterActions.setTextFilter('bill'));
 }, 3000)
 
 const state = store.getState();
