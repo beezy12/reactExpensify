@@ -12,14 +12,15 @@ import './styles/styles.scss';
 const store = configureStore();
 
 // dispatch actions to the store
-store.dispatch(expenseActions.addExpense({ description: 'Water bill', note: 'this was late', amount: 500000, createdAt: 302323 }));
-store.dispatch(expenseActions.addExpense({ description: 'Gas bill', amount: 4000000, note: 'on time' }));
+store.dispatch(expenseActions.addExpense({ description: 'Water bill', note: 'this was late', amount: 5000 }));
+store.dispatch(expenseActions.addExpense({ description: 'Gas bill', note: 'on time', createdAt: 1000 }));
+store.dispatch(expenseActions.addExpense({ description: 'car payment', note: 'this was late', amount: 666600000 }));
 // store.dispatch(filterActions.setTextFilter('bill'));   // this returns two bills
-store.dispatch(filterActions.setTextFilter('water'));    // ....but this returns only one
+// store.dispatch(filterActions.setTextFilter('water'));    // ....but this returns only one
 
-setTimeout(() => {
-  store.dispatch(filterActions.setTextFilter('bill'));
-}, 3000)
+// setTimeout(() => {
+//   store.dispatch(filterActions.setTextFilter('bill'));
+// }, 3000)
 
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
