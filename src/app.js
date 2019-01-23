@@ -17,6 +17,10 @@ store.dispatch(expenseActions.addExpense({ description: 'Gas bill', amount: 4000
 //store.dispatch(filterActions.setTextFilter('bill'));   // this returns two bills
 store.dispatch(filterActions.setTextFilter('water'));    // ....but this returns only one
 
+setTimeout(() => {
+  store.dispatch(filterActions.setTextFilter('cable'));
+}, 3000)
+
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpenses);
