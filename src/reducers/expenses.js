@@ -13,9 +13,9 @@
 // SPREAD OPERATOR -> ...state is the array of the 3 original things, I can then add action.expense and it
 // ...it just adds it to the end of the array. this does the same thing as array.concat
 
-const expensesRedducerDefaultState = [];
+const expensesReducerDefaultState = [];
 
-const expensesReducer = (state = expensesRedducerDefaultState, action) => {
+const expensesReducer = (state = expensesReducerDefaultState, action) => {
 
   switch (action.type) {
     case 'ADD_EXPENSE':
@@ -25,7 +25,7 @@ const expensesReducer = (state = expensesRedducerDefaultState, action) => {
         action.expense
       ]
     case 'REMOVE_EXPENSE':
-      console.log('what does state look like', state)
+      //console.log('what does state look like', state)
       return state.filter(expense => expense.id !== action.id);
     case 'EDIT_EXPENSE':
       return state.map((expense) => {
