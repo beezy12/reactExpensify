@@ -7,12 +7,17 @@ import selectExpenses from '../selectors/expenses';
 // if I passed an expense prop to ExpenseListItem like expense={expense}, I would've had to call 
 // expense.whatever on each item....but by using the spread operator technique here, Im just pulling 
 // each item out by name, so in the other file I can just access 'description' or whatever
-const ExpenseList = (props) => (
+export const ExpenseList = (props) => (
   <div>
-    <h1>EXPENSE LIST</h1>
-    {props.expenses.map((expense) => {
-      return <ExpenseListItem key={expense.id} {...expense} /> 
-    })}
+    {
+      props.expenses.length === 0 ? (
+        <p>no expenses</p>
+      ) : (
+        props.expenses.map((expense) => {
+          return <ExpenseListItem key={expense.id} {...expense} /> 
+        })         
+      )
+    }
   </div>
 );
 

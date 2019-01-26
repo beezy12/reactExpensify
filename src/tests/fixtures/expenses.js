@@ -1,5 +1,6 @@
 import moment from 'moment'
 
+// this mimics an expense list
 export default [{
   id: '1',
   description: 'Gum',
