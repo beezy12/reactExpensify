@@ -12,6 +12,7 @@ import 'react-dates/lib/css/_datepicker.css'
 
 
 const store = configureStore();
+console.log('test')
 
 // IMPORTANT - this is how you connect react to redux. wrap the app with Provider tags.
 // AppRouter used to be in the ReactDOM.render()
