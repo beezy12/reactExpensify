@@ -9,7 +9,7 @@ export class AddExpensePage extends React.Component {
 
     // added the onSubmit for unit testing
     // props.dispatch(addExpense(expense));   // ADDING EXPENSE TO STORE
-    this.props.onSubmit(expense);
+    this.props.addExpense(expense);
     this.props.history.push('/');
   };
   render() {
@@ -27,7 +27,7 @@ export class AddExpensePage extends React.Component {
 // set all this up for unit testing
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSubmit: (expense) => dispatch(addExpense(expense))
+    addExpense: (expense) => dispatch(addExpense(expense))
   };
 };
 
